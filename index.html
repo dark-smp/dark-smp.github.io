@@ -25,28 +25,27 @@
             overflow-x: hidden;
         }
 
-        /* CONTAINER COM ASPECT-RATIO AUTOMÁTICO ESTILO ROBLOX */
+        /* CONTAINER COM SHADOW (SOMBRA EM ESTILO GLOW NEON) */
         .container {
             width: 90vw;
             max-width: 680px;
-            /* Define a proporção vertical/horizontal perfeita para o menu */
             aspect-ratio: 4 / 5; 
             max-height: 85vh;
-            
             background: #1a1a1e;
             padding: 35px 30px;
             border-radius: 16px;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
-            border: 1px solid #29292e;
             
-            /* Mantém o conteúdo interno esticado corretamente */
+            /* Sombra principal: uma camada escura e um leve brilho vermelho nas bordas */
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 
+                        0 0 30px rgba(255, 59, 48, 0.15);
+            
+            border: 1px solid rgba(255, 59, 48, 0.2);
             display: flex;
             flex-direction: column;
             justify-content: space-between; 
             overflow-y: auto;
         }
 
-        /* Customização da barra de rolagem interna se a tela for muito pequena */
         .container::-webkit-scrollbar {
             width: 6px;
         }
@@ -61,7 +60,8 @@
             color: #ff3b30;
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 0 0 15px rgba(255, 59, 48, 0.3);
+            /* Sombra no texto (Text Shadow) para dar efeito de brilho nas letras */
+            text-shadow: 0 0 15px rgba(255, 59, 48, 0.6), 0 4px 10px rgba(0, 0, 0, 0.9);
         }
 
         .version-badge {
@@ -73,14 +73,17 @@
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 700;
-            border: 1px solid rgba(255, 59, 48, 0.2);
+            border: 1px solid rgba(255, 59, 48, 0.3);
             margin: 5px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
         }
 
         .subtitle {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #a8a8b3;
             margin-bottom: 15px;
+            line-height: 1.4;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .section-title {
@@ -92,6 +95,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
         }
 
         p {
@@ -101,6 +105,7 @@
             margin-bottom: 15px;
         }
 
+        /* LISTA COM SHADOW ESCURA PARA DAR PROFUNDIDADE */
         .features-list {
             text-align: left;
             background: #121214;
@@ -112,6 +117,8 @@
             flex-direction: column;
             gap: 12px;
             margin-bottom: 15px;
+            /* Sombra interna para parecer recortado no painel */
+            box-shadow: inset 0 4px 15px rgba(0, 0, 0, 0.6);
         }
 
         .features-list li {
@@ -128,27 +135,33 @@
             color: #ff3b30;
             font-weight: 700;
             white-space: nowrap;
+            text-shadow: 0 0 5px rgba(255, 59, 48, 0.2);
         }
 
+        /* IP BOX COM SOMBRA DINÂMICA NO HOVER */
         .ip-box {
             background: #09090a;
             padding: 12px;
             border-radius: 8px;
             font-weight: 700;
             color: #00b37e;
-            border: 1px dashed #29292e;
+            border: 1px dashed rgba(0, 179, 126, 0.4);
             cursor: pointer;
             transition: all 0.2s;
             margin-bottom: 15px;
             font-size: 0.95rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4), inset 0 2px 5px rgba(0, 0, 0, 0.5);
         }
 
         .ip-box:hover {
             background: #121214;
             border-color: #00b37e;
             transform: scale(1.01);
+            /* Adiciona um brilho verde ao passar o mouse */
+            box-shadow: 0 0 15px rgba(0, 179, 126, 0.3);
         }
 
+        /* BOTÃO DO DISCORD COM SOMBRA */
         .discord-btn {
             display: inline-block;
             background: #5865F2;
@@ -157,13 +170,16 @@
             padding: 12px 20px;
             border-radius: 8px;
             font-weight: 700;
-            transition: background 0.2s;
+            transition: all 0.2s;
             width: 100%;
             font-size: 0.95rem;
+            box-shadow: 0 4px 12 rgba(88, 101, 242, 0.3);
         }
 
         .discord-btn:hover {
             background: #4752c4;
+            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
+            transform: translateY(-1px);
         }
     </style>
 </head>
@@ -172,13 +188,13 @@
     <div class="container">
         <div>
             <h1>Dark SMP</h1>
-            <div class="version-badge">Supported Versions: 1.8 - 1.20.x</div>
-            <p class="subtitle">The ultimate survival, economy & PvP server!</p>
+            <div class="version-badge">Supported Versions: 26.2+</div>
+            <p class="subtitle">Searching for a server in North America with CPvP, survival, economy, no lag, and a great ping on 26.2? You found it!</p>
         </div>
 
         <div>
             <div class="section-title">ℹ️ About the Server</div>
-            <p>A server focused on community, trading, and heavy combat. Choose your strategy, gear up, build your wealth, and dominate our world!</p>
+            <p>A high-performance North American server focused on community, trading, and competitive combat. Choose your strategy, gear up, build your wealth, and dominate our world!</p>
         </div>
 
         <div>
@@ -206,7 +222,7 @@
                 </li>
                 <li>
                     <span class="feature-title">🔒 Anti-Cheat:</span>
-                    <span>Powerful and fair hacker protection to ensure a clean experience.</span>
+                    <span>Powerful hacker protection to ensure a clean and lag-free experience.</span>
                 </li>
             </ul>
         </div>
@@ -217,8 +233,8 @@
                 roosevelt-melt.tun.ply.gg
             </div>
 
-            <!-- Substitua o # pelo link do seu Discord quando tiver um -->
-            <a href="#" target="_blank" class="discord-btn">Join our Discord</a>
+            <!-- Botão configurado com seu convite real do Discord -->
+            <a href="https://discord.gg/aKB8CJPpn2" target="_blank" class="discord-btn">Join our Discord</a>
         </div>
     </div>
 
