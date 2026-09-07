@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -69,6 +69,33 @@
             font-size: 1rem;
         }
 
+        .features-list {
+            text-align: left;
+            background: #121214;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid #29292e;
+            list-style: none;
+        }
+
+        .features-list li {
+            margin-bottom: 12px;
+            color: #c4c4cc;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features-list li strong {
+            color: #ff3b30;
+        }
+
+        .features-list li:last-child {
+            margin-bottom: 0;
+        }
+
         .ip-box {
             background: #09090a;
             padding: 15px;
@@ -108,21 +135,29 @@
 
     <div class="container">
         <h1>Dark SMP</h1>
-        <p class="subtitle">The ultimate survival server is coming soon!</p>
+        <p class="subtitle">The ultimate survival, economy & PvP server is coming soon!</p>
 
-        <div class="section-title">ℹ️ Sobre o Servidor</div>
-        <p>Um servidor focado em comunidade, sobrevivência, construções épicas e história (lore). Junte-se aos seus amigos e crie sua própria jornada no nosso mundo!</p>
+        <div class="section-title">ℹ️ About the Server</div>
+        <p>A server focused on community, trading, and heavy combat. Choose your strategy, gear up, build your wealth, and dominate our world!</p>
 
-        <div class="section-title">🎮 Como Jogar?</div>
-        <p>Clique no bloco abaixo para copiar o IP e adicione na sua lista de servidores do Minecraft:</p>
+        <div class="section-title">⚔️ Game Modes & Features</div>
+        <ul class="features-list">
+            <li>🎯 <strong>PvP Survival:</strong> Classic survival experience but with danger around every corner. Protect your loot!</li>
+            <li>💼 <strong>Economy:</strong> Make money, trade with other players, set up shops, and control the market.</li>
+            <li>🐷 <strong>Spawners:</strong> Collect, upgrade, and place custom spawners to build massive automated resource farms.</li>
+            <li>💥 <strong>CPvP (Crystal PvP):</strong> Fully optimized arenas for crystal and anchor combat lovers.</li>
+            <li>🛡️ <strong>KitPvP:</strong> Choose your kit, jump straight into the arena, and practice your mechanics instantly.</li>
+        </ul>
+
+        <div class="section-title">🎮 How to Join?</div>
+        <p>Click on the box below to copy the IP and add it to your Minecraft server list:</p>
         
-        <!-- Altere o texto abaixo para o IP do seu servidor quando ele estiver pronto -->
-        <div class="ip-box" onclick="navigator.clipboard.writeText('://darksmp.com'); alert('IP Copiado!');">
-            EM BREVE (Clique para copiar)
+        <div class="ip-box" onclick="navigator.clipboard.writeText('roosevelt-melt.tun.ply.gg'); alert('IP Copied!');">
+            roosevelt-melt.tun.ply.gg
         </div>
 
-        <!-- Coloque o link do seu servidor do Discord no lugar do # -->
-        <a href="#" target="_blank" class="discord-btn">Entrar no nosso Discord</a>
+        <!-- Substitua o # pelo link do seu Discord quando tiver um -->
+        <a href="#" target="_blank" class="discord-btn">Join our Discord</a>
     </div>
 
 </body>
