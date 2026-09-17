@@ -1,239 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <!-- Embed Meta Tags (Open Graph) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark SMP - Minecraft Server</title>
+
+    <!-- Embed Meta Tags Corrigidas -->
     <meta property="og:title" content="Dark SMP - Minecraft Server" />
-    <meta property="og:url" content="https://dark-smp.ddns.net" />
+    <meta property="og:url" content="http://ddns.net" />
     <meta property="og:type" content="website" />
-    <meta name="theme-color" content="#120a2a"> <!-- Sidebar color -->
+    <meta name="theme-color" content="#ff0000"> <!-- Barra lateral vermelha no Discord -->
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Dark SMP">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark SMP - Minecraft Server</title>
-    <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* Reset básico e tema escuro anti-queimar olhos */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Courier New', Courier, monospace; /* Fonte estilo terminal/Linux */
         }
 
         body {
-            background-color: #0c0c0e;
-            color: #e1e1e6;
+            background-color: #0d0d11; /* Fundo super escuro */
+            color: #ffffff;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             min-height: 100vh;
             padding: 20px;
-            overflow-x: hidden;
         }
 
-        .container {
-            width: 90vw;
-            max-width: 680px;
-            aspect-ratio: 4 / 5; 
-            max-height: 85vh;
-            background: #1a1a1e;
-            padding: 35px 30px;
-            border-radius: 16px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 
-                        0 0 30px rgba(255, 59, 48, 0.15);
-            border: 1px solid rgba(255, 59, 48, 0.2);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between; 
-            overflow-y: auto;
+        /* Janela estilo Linux com cantos arredondados (corners) */
+        .linux-window {
+            width: 100%;
+            max-width: 600px;
+            background-color: #16161e;
+            border: 2px solid #ff0000; /* Borda vermelha sutil */
+            border-radius: 12px; /* Cantos arredondados */
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
         }
 
-        .container::-webkit-scrollbar {
-            width: 6px;
-        }
-        .container::-webkit-scrollbar-thumb {
-            background: #29292e;
-            border-radius: 10px;
-        }
-
-        h1 {
-            font-size: 2.8rem;
-            font-weight: 900;
-            color: #ff3b30;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 15px rgba(255, 59, 48, 0.6), 0 4px 10px rgba(0, 0, 0, 0.9);
-        }
-
-        .version-badge {
-            display: inline-block;
-            align-self: center;
-            background: rgba(255, 59, 48, 0.1);
-            color: #ff3b30;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            border: 1px solid rgba(255, 59, 48, 0.3);
-            margin: 5px 0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-        }
-
-        .subtitle {
-            font-size: 0.95rem;
-            color: #a8a8b3;
-            margin-bottom: 15px;
-            line-height: 1.4;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .section-title {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 8px;
+        /* Barra superior da janela de Linux */
+        .window-bar {
+            background-color: #222230;
+            padding: 10px 15px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+            justify-content: space-between;
+            border-bottom: 2px solid #ff0000;
         }
 
-        p {
-            color: #c4c4cc;
-            line-height: 1.5;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-        }
-
-        .features-list {
-            text-align: left;
-            background: #121214;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #29292e;
-            list-style: none;
+        /* Botões de fechar/minimizar estilo Linux */
+        .window-buttons {
             display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 15px;
-            box-shadow: inset 0 4px 15px rgba(0, 0, 0, 0.6);
-        }
-
-        .features-list li {
-            display: grid;
-            grid-template-columns: auto 1fr;
             gap: 8px;
-            align-items: start;
-            color: #c4c4cc;
-            font-size: 0.85rem;
-            line-height: 1.4;
         }
 
-        .feature-title {
-            color: #ff3b30;
-            font-weight: 700;
-            white-space: nowrap;
-            text-shadow: 0 0 5px rgba(255, 59, 48, 0.2);
-        }
-
-        .ip-box {
-            background: #09090a;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: 700;
-            color: #00b37e;
-            border: 1px dashed rgba(0, 179, 126, 0.4);
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4), inset 0 2px 5px rgba(0, 0, 0, 0.5);
-        }
-
-        .ip-box:hover {
-            background: #121214;
-            border-color: #00b37e;
-            transform: scale(1.01);
-            box-shadow: 0 0 15px rgba(0, 179, 126, 0.3);
-        }
-
-        .discord-btn {
+        .btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
             display: inline-block;
-            background: #5865F2;
-            color: #ffffff;
-            text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-weight: 700;
-            transition: all 0.2s;
-            width: 100%;
-            font-size: 0.95rem;
-            box-shadow: 0 4px 12px rgba(88, 101, 242, 0.3);
+        }
+        .btn-close { background-color: #ff5f56; }
+        .btn-minimize { background-color: #ffbd2e; }
+        .btn-maximize { background-color: #27c93f; }
+
+        .window-title {
+            color: #a9b1d6;
+            font-size: 14px;
+            font-weight: bold;
         }
 
-        .discord-btn:hover {
-            background: #4752c4;
-            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
-            transform: translateY(-1px);
+        /* Conteúdo interno da janela */
+        .window-content {
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        /* Título Principal em Vermelho */
+        .main-title {
+            color: #ff0000;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* Informações do Servidor */
+        .info-box {
+            background-color: #0d0d11;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #333;
+            text-align: left;
+        }
+
+        .info-line {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .info-line:last-child {
+            margin-bottom: 0;
+        }
+
+        .label {
+            color: #ff0000; /* Marcadores em vermelho */
+            font-weight: bold;
+        }
+
+        .value {
+            color: #e0af68; /* Valores em amarelo/laranja estilo terminal */
+        }
+        
+        .value.not-finished {
+            color: #787c99;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div>
-            <h1>Dark SMP</h1>
-            <div class="version-badge">Supported Versions: 26.2 - 1.20.x</div>
-            <p class="subtitle">Searching for a server in South America with CPvP, survival, economy, no lag, and a great ping on 26.2 - 1.20.x? You found it!</p>
-        </div>
-
-        <div>
-            <div class="section-title">ℹ️ About the Server</div>
-            <p>A high-performance South American server focused on community, trading, and competitive combat. Choose your strategy, gear up, build your wealth, and dominate our world!</p>
-        </div>
-
-        <div>
-            <div class="section-title">⚔️ Game Modes & Features</div>
-            <ul class="features-list">
-                <li>
-                    <span class="feature-title">🎯 PvP Survival:</span>
-                    <span>Classic survival experience with danger around every corner.</span>
-                </li>
-                <li>
-                    <span class="feature-title">💼 Economy:</span>
-                    <span>Make money, trade, set up shops, and control the market.</span>
-                </li>
-                <li>
-                    <span class="feature-title">🐷 Spawners:</span>
-                    <span>Collect, upgrade, and place spawners to build automatic farms.</span>
-                </li>
-                <li>
-                    <span class="feature-title">💥 CPvP (Crystal):</span>
-                    <span>Fully optimized arenas for crystal and anchor combat lovers.</span>
-                </li>
-                <li>
-                    <span class="feature-title">🛡️ KitPvP:</span>
-                    <span>Choose your kit and jump straight into the practice arena.</span>
-                </li>
-                <li>
-                    <span class="feature-title">🔒 Anti-Cheat:</span>
-                    <span>Powerful hacker protection to ensure a clean and lag-free experience.</span>
-                </li>
-            </ul>
-        </div>
-
-        <div>
-            <div class="section-title">🎮 How to Join?</div>
-            <div class="ip-box" onclick="navigator.clipboard.writeText('roosevelt-melt.tun.ply.gg'); alert('IP Copied!');">
-                roosevelt-melt.tun.ply.gg
+    <!-- Estrutura da Janela Linux -->
+    <div class="linux-window">
+        <div class="window-bar">
+            <div class="window-buttons">
+                <span class="btn btn-close"></span>
+                <span class="btn btn-minimize"></span>
+                <span class="btn btn-maximize"></span>
             </div>
+            <div class="window-title">terminal @ dark-smp</div>
+            <div style="width: 50px;"></div> <!-- Alinhamento -->
+        </div>
 
-            <a href="https://discord.gg/aKB8CJPpn2" target="_blank" class="discord-btn">Join our Discord</a>
+        <div class="window-content">
+            <!-- Seu título vermelho -->
+            <h1 class="main-title">Dark SMP - Minecraft Server</h1>
+
+            <!-- Bloco de informações solicitadas -->
+            <div class="info-box">
+                <div class="info-line">
+                    <span class="label">> Supported Versions: </span>
+                    <span class="value">26.2 - 1.21.11</span>
+                </div>
+                <div class="info-line">
+                    <span class="label">> Server IP: </span>
+                    <span class="value not-finished">not finished</span>
+                </div>
+            </div>
         </div>
     </div>
 
