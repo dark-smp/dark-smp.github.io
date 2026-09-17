@@ -73,7 +73,7 @@
             text-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
         }
 
-        /* Painel de Informações (delay 2.5s) */
+        /* Painel de Informações */
         .info-box {
             display: flex;
             flex-direction: column;
@@ -84,7 +84,7 @@
             transition: opacity 1s ease, transform 1s ease;
         }
 
-        /* Revela as informações após os 2.5 segundos */
+        /* Revela as informações após os dados carregarem */
         .info-box.loaded {
             opacity: 1;
             transform: translateY(0);
@@ -205,48 +205,48 @@
         }
 
         async function updateServerStatus() {
+            const dot = document.getElementById("statusDot");
+            const countText = document.getElementById("playerCount");
+
             try {
-                const response = await fetch(`https://minetools.eu`);
+                // Rota Java v2 que não valida contas da Mojang, perfeita para cracked
+                const response = await fetch(`https://mcstatus.io{ipOriginal}`);
                 const data = await response.json();
-                const dot = document.getElementById("statusDot");
-                const countText = document.getElementById("playerCount");
 
                 if (dot && countText) {
-                    if (data && !data.error) {
+                    if (data && data.online === true) {
                         dot.className = "status-dot status-online";
-                        countText.innerText = `${data.players.online} / ${data.players.max} Players`;
+                        
+                        const onlinePlayers = data.players?.online ?? 0;
+                        const maxPlayers = data.players?.max ?? 20;
+
+                        countText.innerText = `${onlinePlayers} / ${maxPlayers} Players`;
                         countText.style.color = "#ffffff";
                     } else {
-                        const res2 = await fetch(`https://mcsrvstat.us{ipOriginal}`);
-                        const data2 = await res2.json();
-                        if (data2.online) {
-                            dot.className = "status-dot status-online";
-                            countText.innerText = `${data2.players.online} / ${data2.players.max} Players`;
-                            countText.style.color = "#ffffff";
-                        } else {
-                            dot.className = "status-dot status-offline";
-                            countText.innerText = "OFFLINE";
-                            countText.style.color = "#ff334b";
-                        }
+                        setOffline(dot, countText);
                     }
                 }
             } catch (error) {
-                const countText = document.getElementById("playerCount");
-                if (countText) {
-                    countText.innerText = "OFFLINE";
-                    countText.style.color = "#ff334b";
-                }
-                const dot = document.getElementById("statusDot");
-                if (dot) dot.className = "status-dot status-offline";
+                setOffline(dot, countText);
             }
+        }
+
+        function setOffline(dot, countText) {
+            if (countText) {
+                countText.innerText = "OFFLINE";
+                countText.style.color = "#ff334b";
+            }
+            if (dot) dot.className = "status-dot status-offline";
         }
 
         window.addEventListener('DOMContentLoaded', () => {
             updateServerStatus();
+            
+            // Ativa o fade-in visual assim que a página carrega
             setTimeout(() => {
-                document.getElementById('infoBox').classList.add('loaded');
-                setInterval(updateServerStatus, 30000);
-            }, 2500); 
+                const infoBox = document.getElementById('infoBox');
+                if (infoBox) infoBox.classList.add('loaded');
+            }, 600);
         });
     </script>
 </body>
