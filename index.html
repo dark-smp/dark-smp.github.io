@@ -5,87 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dark SMP - Minecraft Server</title>
 
-    <!-- Embed Meta Tags Corrigidas com seu Domínio Exato -->
+    <!-- Embed Meta Tags -->
     <meta property="og:title" content="Dark SMP - Minecraft Server" />
     <meta property="og:url" content="http://ddns.net" />
     <meta property="og:type" content="website" />
-    <meta name="theme-color" content="#ff0000"> <!-- Barra lateral vermelha no Discord -->
+    <meta name="theme-color" content="#ff0000">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Dark SMP">
 
     <style>
-        /* Reset básico e tema escuro anti-queimar olhos */
+        /* Reset básico e tema escuro completo */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Courier New', Courier, monospace; /* Fonte estilo terminal/Linux */
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* Centraliza tudo na tela perfeitamente */
+        html, body {
+            height: 100%;
+            background-color: #0d0d11;
         }
 
         body {
-            background-color: #0d0d11; /* Fundo super escuro */
-            color: #ffffff;
-            padding: 40px 20px;
             display: flex;
-            justify-content: center;
+            justify-content: center; /* Centraliza na horizontal */
+            align-items: center;     /* Centraliza na vertical */
+            padding: 20px;
         }
 
-        /* Layout normal da página */
+        /* Janela com tamanho normalizado e fixo */
         .container {
             width: 100%;
-            max-width: 900px; /* Largura normal padrão para sites */
+            max-width: 650px; /* Largura ideal para não esticar demais */
             background-color: #16161e;
-            border: 2px solid #ff0000; /* Borda vermelha */
-            border-radius: 12px; /* Cantos arredondados */
+            border: 2px solid #ff0000;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
         }
 
-        /* Barra superior estilo Linux (Sem botões) */
+        /* Barra superior */
         .window-bar {
             background-color: #222230;
-            padding: 14px 20px;
+            padding: 12px 20px;
             border-bottom: 2px solid #ff0000;
         }
 
         .window-title {
             color: #a9b1d6;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: bold;
             letter-spacing: 1px;
         }
 
-        /* Conteúdo interno com tamanho normalizado */
+        /* Conteúdo interno alinhado */
         .window-content {
             padding: 40px 30px;
+            text-align: center; /* Centraliza o título */
         }
 
         /* Título Principal em Vermelho */
         .main-title {
             color: #ff0000;
-            font-size: 2.8rem; /* Tamanho grande e normal para títulos */
-            margin-bottom: 35px;
+            font-size: 2.4rem;
+            margin-bottom: 30px;
             text-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
             font-weight: bold;
             letter-spacing: 1px;
         }
 
-        /* Informações do Servidor ocupando o espaço corretamente */
+        /* Bloco de informações */
         .info-box {
             background-color: #0d0d11;
             border-radius: 8px;
-            padding: 25px;
+            padding: 20px 25px;
             border: 1px solid #333;
+            text-align: left; /* Mantém os textos alinhados à esquerda dentro do bloco */
         }
 
         .info-line {
-            margin-bottom: 15px;
-            font-size: 18px; /* Texto mais legível */
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            margin-bottom: 12px;
+            font-size: 16px;
         }
 
         .info-line:last-child {
@@ -93,12 +97,12 @@
         }
 
         .label {
-            color: #ff0000; /* Marcadores em vermelho */
+            color: #ff0000;
             font-weight: bold;
         }
 
         .value {
-            color: #e0af68; /* Valores em amarelo/laranja estilo terminal */
+            color: #e0af68;
         }
         
         .value.not-finished {
@@ -109,17 +113,17 @@
 </head>
 <body>
 
-    <!-- Container do Site -->
+    <!-- Container do Site Centralizado -->
     <div class="container">
         <div class="window-bar">
             <div class="window-title">root@dark-smp:~#</div>
         </div>
 
         <div class="window-content">
-            <!-- Seu título vermelho -->
+            <!-- Título centralizado -->
             <h1 class="main-title">Dark SMP - Minecraft Server</h1>
 
-            <!-- Bloco de informações solicitado -->
+            <!-- Bloco de informações -->
             <div class="info-box">
                 <div class="info-line">
                     <span class="label">> Supported Versions:</span>
