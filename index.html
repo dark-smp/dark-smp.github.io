@@ -223,7 +223,7 @@
                         dot.className = "status-dot status-online";
                         
                         const onlinePlayers = data.players?.online ?? 0;
-                        const maxPlayers = data.players?.max ?? 20;
+                        const maxPlayers = data.players?.max ?? 1000;
 
                         countText.innerText = `${onlinePlayers} / ${maxPlayers} Players`;
                         countText.style.color = "#ffffff";
