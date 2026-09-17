@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dark SMP - Minecraft Server</title>
 
+    <!-- Evitar cache para atualizar rápido -->
+    <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0" />
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="expires" content="0" />
+
     <!-- Embed Meta Tags -->
     <meta property="og:title" content="Dark SMP - Minecraft Server" />
     <meta property="og:url" content="http://ddns.net" />
@@ -16,123 +21,117 @@
     <meta name="twitter:title" content="Dark SMP">
 
     <style>
-        /* Reset básico e tema escuro completo */
+        /* Reset e Fontes Modernas/Futuristas (Sem ser pixelada) */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
-        /* Centraliza tudo na tela perfeitamente */
         html, body {
             height: 100%;
-            background-color: #0d0d11;
+            background-color: #06060a; /* Fundo escuro absoluto e limpo */
         }
 
         body {
             display: flex;
-            justify-content: center; /* Centraliza na horizontal */
-            align-items: center;     /* Centraliza na vertical */
-            padding: 20px;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
         }
 
-        /* Janela com tamanho normalizado e fixo */
+        /* Container 300x250 - Design Futurista de Vidro (Glassmorphism) */
         .container {
-            width: 100%;
-            max-width: 650px; /* Largura ideal para não esticar demais */
-            background-color: #16161e;
-            border: 2px solid #ff0000;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+            width: 300px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.03); /* Vidro escuro translúcido */
+            backdrop-filter: blur(10px); /* Efeito de desfoque no fundo */
+            -webkit-backdrop-filter: blur(10px);
+            
+            /* Borda fina com degradê de luz suave, destacando o vermelho solicitado antes */
+            border: 1px solid rgba(255, 0, 50, 0.25);
+            border-radius: 16px; /* Curvas elegantes nos cantos */
+            
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 30px 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5),
+                        0 0 40px rgba(255, 0, 50, 0.05); /* Brilho de presença bem sutil */
         }
 
-        /* Barra superior */
-        .window-bar {
-            background-color: #222230;
-            padding: 12px 20px;
-            border-bottom: 2px solid #ff0000;
-        }
-
-        .window-title {
-            color: #a9b1d6;
-            font-size: 14px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        /* Conteúdo interno alinhado */
-        .window-content {
-            padding: 40px 30px;
-            text-align: center; /* Centraliza o título */
-        }
-
-        /* Título Principal em Vermelho */
+        /* Título Principal Limpo e Elegante */
         .main-title {
-            color: #ff0000;
-            font-size: 2.4rem;
-            margin-bottom: 30px;
-            text-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
-            font-weight: bold;
-            letter-spacing: 1px;
+            color: #ffffff;
+            font-size: 1.4rem;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
         }
 
-        /* Bloco de informações */
+        /* Painel de Informações Minimalista */
         .info-box {
-            background-color: #0d0d11;
-            border-radius: 8px;
-            padding: 20px 25px;
-            border: 1px solid #333;
-            text-align: left; /* Mantém os textos alinhados à esquerda dentro do bloco */
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
         }
 
         .info-line {
-            margin-bottom: 12px;
-            font-size: 16px;
+            display: flex;
+            justify-content: space-between; /* Alinha labels na esquerda e valores na direita */
+            align-items: center;
+            font-size: 13px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Linha divisória ultra fina */
+            padding-bottom: 8px;
         }
 
         .info-line:last-child {
-            margin-bottom: 0;
+            border-bottom: none;
+            padding-bottom: 0;
         }
 
+        /* Texto de identificação discreto */
         .label {
-            color: #ff0000;
-            font-weight: bold;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 400;
+            letter-spacing: 0.5px;
         }
 
+        /* Valores com tipografia nítida e limpa */
         .value {
-            color: #e0af68;
+            color: #ffffff;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
         
+        /* IP não finalizado - Destaque em Vermelho Limpo */
         .value.not-finished {
-            color: #787c99;
-            font-style: italic;
+            color: #ff334b;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Container do Site Centralizado -->
+    <!-- Interface Futurista Minimalista (300x250) -->
     <div class="container">
-        <div class="window-bar">
-            <div class="window-title">root@dark-smp:~#</div>
-        </div>
+        <!-- Título Clean -->
+        <h1 class="main-title">Dark SMP</h1>
 
-        <div class="window-content">
-            <!-- Título centralizado -->
-            <h1 class="main-title">Dark SMP - Minecraft Server</h1>
-
-            <!-- Bloco de informações -->
-            <div class="info-box">
-                <div class="info-line">
-                    <span class="label">> Supported Versions:</span>
-                    <span class="value">26.2 - 1.21.11</span>
-                </div>
-                <div class="info-line">
-                    <span class="label">> Server IP:</span>
-                    <span class="value not-finished">not finished</span>
-                </div>
+        <!-- Dados de Interface -->
+        <div class="info-box">
+            <div class="info-line">
+                <span class="label">Versions</span>
+                <span class="value">26.2 - 1.21.11</span>
+            </div>
+            <div class="info-line">
+                <span class="label">Server IP</span>
+                <span class="value not-finished">not finished</span>
             </div>
         </div>
     </div>
