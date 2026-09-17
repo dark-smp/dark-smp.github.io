@@ -209,8 +209,8 @@
             const countText = document.getElementById("playerCount");
 
             try {
-                // Rota Java v2 que não valida contas da Mojang, perfeita para cracked
-                const response = await fetch(`https://mcstatus.io{ipOriginal}`);
+                // Nova rota focada estritamente na leitura do Query do servidor
+                const response = await fetch(`https://mcsrvstat.us{ipOriginal}`);
                 const data = await response.json();
 
                 if (dot && countText) {
@@ -242,7 +242,6 @@
         window.addEventListener('DOMContentLoaded', () => {
             updateServerStatus();
             
-            // Ativa o fade-in visual assim que a página carrega
             setTimeout(() => {
                 const infoBox = document.getElementById('infoBox');
                 if (infoBox) infoBox.classList.add('loaded');
