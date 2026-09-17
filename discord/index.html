@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark SMP - Discord Community</title>
+
+    <!-- Ícone da aba (Bloco de Grama) -->
+    <link rel="icon" type="image/x-icon" href="https://minecraftservices.com">
+
+    <!-- Evitar cache antigo -->
+    <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0" />
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="expires" content="0" />
+
+    <!-- Embed Meta Tags para quando compartilharem o link /discord -->
+    <meta property="og:title" content="Dark SMP - Discord Server" />
+    <meta property="og:description" content="Click here to join the official Dark SMP community on Discord!" />
+    <meta property="og:url" content="http://ddns.net" />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#ff0000">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            background-color: #06060a; 
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Container de Vidro adaptado para o tamanho ideal do Widget do Discord */
+        .container {
+            width: 410px;
+            height: 610px;
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            
+            border: 1px solid rgba(255, 0, 50, 0.28);
+            border-radius: 20px; 
+            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 30px 25px; 
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.65),
+                        0 0 50px rgba(255, 0, 50, 0.06);
+            
+            /* Efeito de delay de 2.5s igual ao site principal */
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        /* Revela o painel após o tempo definido */
+        .container.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Título Principal */
+        .main-title {
+            color: #ffffff;
+            font-size: 2rem; 
+            text-align: center;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
+            margin-bottom: 20px;
+        }
+
+        /* Área interna do Widget */
+        .widget-box {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Garante que o iframe ocupe todo o espaço interno sem quebrar */
+        iframe {
+            width: 100% !important;
+            height: 100% !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Container Futurista do seu Discord -->
+    <div class="container" id="discordContainer">
+        <!-- Título principal -->
+        <h1 class="main-title">Dark Discord</h1>
+
+        <!-- Bloco contendo o seu Iframe oficial do Discord -->
+        <div class="widget-box">
+            <iframe src="https://discord.com/widget?id=1515363162612830450&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Mantém a sincronização de 2.5 segundos de delay do site principal
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.getElementById('discordContainer').classList.add('loaded');
+            }, 2500); // 2.5 segundos
+        });
+    </script>
+
+</body>
+</html>
