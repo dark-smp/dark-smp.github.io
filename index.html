@@ -12,7 +12,7 @@
 
     <!-- Embed Meta Tags -->
     <meta property="og:title" content="Dark SMP - Minecraft Server" />
-    <meta property="og:url" content="http://dark-smp.ddns.net" />
+    <meta property="og:url" content="http://ddns.net" />
     <meta property="og:type" content="website" />
     <meta name="theme-color" content="#ff0000">
 
@@ -40,7 +40,7 @@
             padding: 20px;
         }
 
-        /* Container ajustado para o novo tamanho ideal: X = 400px, Y = 350px */
+        /* Container 400x350px Aprovado */
         .container {
             width: 400px;
             height: 350px;
@@ -49,20 +49,20 @@
             -webkit-backdrop-filter: blur(12px);
             
             border: 1px solid rgba(255, 0, 50, 0.28);
-            border-radius: 20px; /* Cantos sutilmente mais arredondados para acompanhar o tamanho */
+            border-radius: 20px; 
             
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 45px 35px 40px 35px; /* Espaçamento interno mais generoso */
+            padding: 45px 35px 40px 35px; 
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.65),
                         0 0 50px rgba(255, 0, 50, 0.06);
         }
 
-        /* Título Principal escalado para a nova proporção */
+        /* Título Principal */
         .main-title {
             color: #ffffff;
-            font-size: 2.2rem; /* Tamanho maior e impactante */
+            font-size: 2.2rem; 
             text-align: center;
             font-weight: 800;
             letter-spacing: 3px;
@@ -70,20 +70,20 @@
             text-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
         }
 
-        /* Painel de Informações distribuído com o novo espaçamento */
+        /* Painel de Informações */
         .info-box {
             display: flex;
             flex-direction: column;
-            gap: 22px; /* Maior separação entre as linhas de dados */
+            gap: 20px; 
         }
 
         .info-line {
             display: flex;
             justify-content: space-between; 
             align-items: center;
-            font-size: 15px; /* Fonte com excelente legibilidade */
+            font-size: 15px; 
             border-bottom: 1px solid rgba(255, 255, 255, 0.06); 
-            padding-bottom: 12px;
+            padding-bottom: 10px;
         }
 
         .info-line:last-child {
@@ -102,36 +102,132 @@
             font-weight: 600;
             letter-spacing: 0.5px;
         }
-        
-        /* IP não finalizado com destaque limpo em vermelho */
-        .value.not-finished {
-            color: #ff334b;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 13px;
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(255, 51, 75, 0.3);
+
+        /* IP em formato de botão clicável futurista */
+        .ip-click {
+            color: #00ffcc;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-shadow: 0 0 8px rgba(0, 255, 204, 0.2);
+            font-size: 13px; /* Um pouco menor para caber o IP longo do ply.gg */
+        }
+
+        .ip-click:hover {
+            color: #ffffff;
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+        }
+
+        /* Indicador de Status com Ponto Pulsante */
+        .status-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #787c99; /* Cor inicial cinza */
+        }
+
+        /* Animação de pulsação para o servidor Online */
+        .status-online {
+            background-color: #00ff66;
+            box-shadow: 0 0 10px #00ff66;
+            animation: pulse 1.8s infinite;
+        }
+
+        .status-offline {
+            background-color: #ff334b;
+            box-shadow: 0 0 10px #ff334b;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.5); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(0, 255, 102, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 102, 0); }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Título principal com tamanho perfeito para a nova largura -->
         <h1 class="main-title">Dark SMP</h1>
 
-        <!-- Bloco de dados minimalista e bem distribuído -->
         <div class="info-box">
+            <!-- Linha de Versões -->
             <div class="info-line">
                 <span class="label">Versions</span>
                 <span class="value">26.2 - 1.21.11</span>
             </div>
+
+            <!-- Linha do Novo IP com clique para copiar -->
             <div class="info-line">
                 <span class="label">Server IP</span>
-                <span class="value not-finished">not finished</span>
+                <span class="value ip-click" id="serverIp" onclick="copyIp()">nicely-kaufman.tun.ply.gg</span>
+            </div>
+
+            <!-- NOVO: Linha do Status e Contador de Jogadores -->
+            <div class="info-line">
+                <span class="label">Status</span>
+                <div class="status-wrapper">
+                    <span class="status-dot" id="statusDot"></span>
+                    <span class="value" id="playerCount">Loading...</span>
+                </div>
             </div>
         </div>
     </div>
+
+    <script>
+        // Configuração do seu IP do ply.gg
+        const ipOriginal = "nicely-kaufman.tun.ply.gg";
+
+        // Função para copiar o IP ao clicar na tela
+        function copyIp() {
+            const ipTexto = document.getElementById("serverIp");
+            navigator.clipboard.writeText(ipOriginal).then(() => {
+                ipTexto.innerText = "COPIED!";
+                ipTexto.style.color = "#ffffff";
+                
+                // Volta o texto original depois de 2 segundos
+                setTimeout(() => {
+                    ipTexto.innerText = ipOriginal;
+                    ipTexto.style.color = "#00ffcc";
+                }, 2000);
+            });
+        }
+
+        // Função futurista que busca os dados da API sem precisar de Query
+        async function updateServerStatus() {
+            try {
+                const response = await fetch(`https://mcsrvstat.us{ipOriginal}`);
+                const data = await response.json();
+                
+                const dot = document.getElementById("statusDot");
+                const countText = document.getElementById("playerCount");
+
+                if (data.online) {
+                    dot.className = "status-dot status-online";
+                    // Se tiver jogadores online mostra a quantia, senão mostra "Online" limpo
+                    const onlinePlayers = data.players.online;
+                    const maxPlayers = data.players.max;
+                    countText.innerText = `${onlinePlayers} / ${maxPlayers} Players`;
+                } else {
+                    dot.className = "status-dot status-offline";
+                    countText.innerText = "OFFLINE";
+                    countText.style.color = "#ff334b";
+                }
+            } catch (error) {
+                document.getElementById("playerCount").innerText = "ERROR";
+            }
+        }
+
+        // Executa a checagem assim que a página abre
+        updateServerStatus();
+        // Atualiza o contador automaticamente a cada 30 segundos
+        setInterval(updateServerStatus, 30000);
+    </script>
 
 </body>
 </html>
