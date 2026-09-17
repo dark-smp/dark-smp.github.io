@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dark SMP - Minecraft Server</title>
 
-    <!-- Embed Meta Tags Corrigidas -->
+    <!-- Embed Meta Tags Corrigidas com seu Domínio Exato -->
     <meta property="og:title" content="Dark SMP - Minecraft Server" />
-    <meta property="og:url" content="http://dark-smp.ddns.net" />
+    <meta property="og:url" content="http://ddns.net" />
     <meta property="og:type" content="website" />
     <meta name="theme-color" content="#ff0000"> <!-- Barra lateral vermelha no Discord -->
 
@@ -27,85 +27,65 @@
         body {
             background-color: #0d0d11; /* Fundo super escuro */
             color: #ffffff;
+            padding: 40px 20px;
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
         }
 
-        /* Janela estilo Linux com cantos arredondados (corners) */
-        .linux-window {
+        /* Layout normal da página */
+        .container {
             width: 100%;
-            max-width: 600px;
+            max-width: 900px; /* Largura normal padrão para sites */
             background-color: #16161e;
-            border: 2px solid #ff0000; /* Borda vermelha sutil */
+            border: 2px solid #ff0000; /* Borda vermelha */
             border-radius: 12px; /* Cantos arredondados */
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
         }
 
-        /* Barra superior da janela de Linux */
+        /* Barra superior estilo Linux (Sem botões) */
         .window-bar {
             background-color: #222230;
-            padding: 10px 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            padding: 14px 20px;
             border-bottom: 2px solid #ff0000;
         }
 
-        /* Botões de fechar/minimizar estilo Linux */
-        .window-buttons {
-            display: flex;
-            gap: 8px;
-        }
-
-        .btn {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-        .btn-close { background-color: #ff5f56; }
-        .btn-minimize { background-color: #ffbd2e; }
-        .btn-maximize { background-color: #27c93f; }
-
         .window-title {
             color: #a9b1d6;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: bold;
+            letter-spacing: 1px;
         }
 
-        /* Conteúdo interno da janela */
+        /* Conteúdo interno com tamanho normalizado */
         .window-content {
-            padding: 30px 20px;
-            text-align: center;
+            padding: 40px 30px;
         }
 
         /* Título Principal em Vermelho */
         .main-title {
             color: #ff0000;
-            font-size: 2.2rem;
-            margin-bottom: 25px;
+            font-size: 2.8rem; /* Tamanho grande e normal para títulos */
+            margin-bottom: 35px;
             text-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
             font-weight: bold;
             letter-spacing: 1px;
         }
 
-        /* Informações do Servidor */
+        /* Informações do Servidor ocupando o espaço corretamente */
         .info-box {
             background-color: #0d0d11;
             border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
+            padding: 25px;
             border: 1px solid #333;
-            text-align: left;
         }
 
         .info-line {
-            margin-bottom: 10px;
-            font-size: 16px;
+            margin-bottom: 15px;
+            font-size: 18px; /* Texto mais legível */
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .info-line:last-child {
@@ -129,30 +109,24 @@
 </head>
 <body>
 
-    <!-- Estrutura da Janela Linux -->
-    <div class="linux-window">
+    <!-- Container do Site -->
+    <div class="container">
         <div class="window-bar">
-            <div class="window-buttons">
-                <span class="btn btn-close"></span>
-                <span class="btn btn-minimize"></span>
-                <span class="btn btn-maximize"></span>
-            </div>
-            <div class="window-title">terminal @ dark-smp</div>
-            <div style="width: 50px;"></div> <!-- Alinhamento -->
+            <div class="window-title">root@dark-smp:~#</div>
         </div>
 
         <div class="window-content">
             <!-- Seu título vermelho -->
             <h1 class="main-title">Dark SMP - Minecraft Server</h1>
 
-            <!-- Bloco de informações solicitadas -->
+            <!-- Bloco de informações solicitado -->
             <div class="info-box">
                 <div class="info-line">
-                    <span class="label">> Supported Versions: </span>
+                    <span class="label">> Supported Versions:</span>
                     <span class="value">26.2 - 1.21.11</span>
                 </div>
                 <div class="info-line">
-                    <span class="label">> Server IP: </span>
+                    <span class="label">> Server IP:</span>
                     <span class="value not-finished">not finished</span>
                 </div>
             </div>
