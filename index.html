@@ -190,12 +190,8 @@
     </div>
 
     <script>
-        // O IP visual e de conexão do servidor
+        // O IP visual e de conexão direta com a API
         const ipVisual = "nicely-kaufman.tun.ply.gg";
-        
-        // Dados de conexão direta do túnel ply.gg
-        const queryHost = "147.185.221.213";
-        const queryPort = "18221";
 
         function copyIp() {
             const ipTexto = document.getElementById("serverIp");
@@ -214,16 +210,15 @@
             const countText = document.getElementById("playerCount");
 
             try {
-                // Usando o endpoint de PING da Minetools (não exige enable-query=true)
-                const response = await fetch(`https://minetools.eu{queryHost}/${queryPort}`);
+                // Chamada idêntica à sua API original (mc-api.io)
+                const response = await fetch(`https://mc-api.io/server/JAVA/nicely-kaufman.tun.ply.gg`);
                 const data = await response.json();
 
                 if (dot && countText) {
-                    // Se a API retornar um objeto válido e sem mensagem de erro, o servidor está online
-                    if (data && !data.error) {
+                    if (data && data.online === true) {
                         dot.className = "status-dot status-online";
                         
-                        // Atualiza as pessoas online e o limite máximo com os dados da API de Ping
+                        // Resgata o número real de pessoas online e o limite real vindos da mc-api.io
                         const onlinePlayers = data.players?.online ?? 0;
                         const maxPlayers = data.players?.max ?? 0;
 
