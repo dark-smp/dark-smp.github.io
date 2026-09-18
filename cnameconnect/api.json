@@ -1,5 +1,18 @@
 {
+  "endpoint": "thedomain156.github.io/cnameconnect",
   "status": "online",
-  "message": "You have successfully connected to the GitHub Pages endpoint!",
-  "ip_mock_target": "185.199.108.153"
+  "service_type": "Static Web Hosting",
+  "protocols_supported": [
+    "HTTP",
+    "HTTPS"
+  ],
+  "ports_open": [
+    80,
+    443
+  ],
+  "minecraft_compatibility": {
+    "status": "incompatible_direct_join",
+    "reason": "GitHub Pages firewalls drop TCP traffic on game port 25565. Direct connection via the game client multiplayer menu will result in an Unknown Host error.",
+    "alternative_solution": "Use Playit.gg or a DDNS provider like DuckDNS for free Minecraft text-address routing."
+  }
 }
