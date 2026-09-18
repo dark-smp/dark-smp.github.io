@@ -2,8 +2,8 @@ name: Minecraft Server Status Checker
 
 on:
   schedule:
-    - cron: '*/10 * * * *' # Roda automaticamente a cada 10 minutos
-  workflow_dispatch: # Permite ativar manualmente
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
 
 jobs:
   check-status:
@@ -16,7 +16,6 @@ jobs:
         id: mc-status
         run: |
           SERVER_IP="nicely-kaufman.tun.ply.gg"
-          
           RESPONSE=$(curl -s "https://mcsrvstat.us")
           ONLINE=$(echo "$RESPONSE" | jq '.online')
           
@@ -28,7 +27,7 @@ jobs:
             echo "PLAYERS=0/0" >> $GITHUB_ENV
           fi
 
-      - name: Update api.json data
+      - name: Create Status Artifact
         run: |
           echo '{
             "endpoint": "dark-smp.github.io",
@@ -37,10 +36,7 @@ jobs:
             "last_checked": "$(date -u)"
           }' > api.json
 
-      - name: Commit and Push Changes
-        run: |
-          git config --global user.name "GitHub Actions Bot"
-          git config --global user.email "actions@github.com"
-          git add api.json
-          git commit -m "Automated status update: ${{ env.STATUS }}" || exit 0
-          git push
+      - name: Upload Dynamic API File
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
