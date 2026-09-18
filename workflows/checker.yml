@@ -1,0 +1,45 @@
+name: Minecraft Server Status Checker
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  check-status:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Query Minecraft Server
+        id: mc-status
+        run: |
+          SERVER_IP="dark-smp.github.io"
+          RESPONSE=$(curl -s "https://mcsrvstat.us")
+          ONLINE=$(echo "$RESPONSE" | jq '.online')
+          
+          if [ "$ONLINE" = "true" ]; then
+            echo "STATUS=Online" >> $GITHUB_ENV
+            echo "PLAYERS=$(echo "$RESPONSE" | jq '.players.online')/$(echo "$RESPONSE" | jq '.players.max')" >> $GITHUB_ENV
+          else
+            echo "STATUS=Server Is Not Online" >> $GITHUB_ENV
+            echo "PLAYERS=0/0" >> $GITHUB_ENV
+          fi
+
+      - name: Update api.json data
+        run: |
+          echo '{
+            "endpoint": "nicely-kaufman.tun.ply.gg",
+            "server_status": "${{ env.STATUS }}",
+            "players_online": "${{ env.PLAYERS }}",
+            "last_checked": "$(date -u)"
+          }' > api.json
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+          git add api.json
+          git commit -m "Automated status update: ${{ env.STATUS }}" || exit 0
+          git push
