@@ -2,8 +2,8 @@ name: Minecraft Server Status Checker
 
 on:
   schedule:
-    - cron: '*/10 * * * *'
-  workflow_dispatch:
+    - cron: '*/10 * * * *' # Automatically runs every 10 minutes
+  workflow_dispatch: # Allows you to click "Run workflow" to test manually
 
 jobs:
   check-status:
@@ -15,7 +15,9 @@ jobs:
       - name: Query Minecraft Server
         id: mc-status
         run: |
-          SERVER_IP="dark-smp.github.io"
+          # YOUR REAL PLAYIT.GG IP ADDRESS
+          SERVER_IP="nicely-kaufman.tun.ply.gg"
+          
           RESPONSE=$(curl -s "https://mcsrvstat.us")
           ONLINE=$(echo "$RESPONSE" | jq '.online')
           
@@ -23,14 +25,14 @@ jobs:
             echo "STATUS=Online" >> $GITHUB_ENV
             echo "PLAYERS=$(echo "$RESPONSE" | jq '.players.online')/$(echo "$RESPONSE" | jq '.players.max')" >> $GITHUB_ENV
           else
-            echo "STATUS=Server Is Not Online" >> $GITHUB_ENV
+            echo "STATUS=Offline" >> $GITHUB_ENV
             echo "PLAYERS=0/0" >> $GITHUB_ENV
           fi
 
       - name: Update api.json data
         run: |
           echo '{
-            "endpoint": "nicely-kaufman.tun.ply.gg",
+            "endpoint": "dark-smp.github.io",
             "server_status": "${{ env.STATUS }}",
             "players_online": "${{ env.PLAYERS }}",
             "last_checked": "$(date -u)"
