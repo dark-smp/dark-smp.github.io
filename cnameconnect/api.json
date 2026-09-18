@@ -1,18 +1,47 @@
-{
-  "endpoint": "thedomain156.github.io/cnameconnect",
-  "status": "online",
-  "service_type": "Static Web Hosting",
-  "protocols_supported": [
-    "HTTP",
-    "HTTPS"
-  ],
-  "ports_open": [
-    80,
-    443
-  ],
-  "minecraft_compatibility": {
-    "status": "incompatible_direct_join",
-    "reason": "GitHub Pages firewalls drop TCP traffic on game port 25565. Direct connection via the game client multiplayer menu will result in an Unknown Host error.",
-    "alternative_solution": "Use Playit.gg or a DDNS provider like DuckDNS for free Minecraft text-address routing."
-  }
-}
+name: Minecraft Server Status Checker
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  check-status:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Query Minecraft Server
+        id: mc-status
+        run: |
+          # TESTING FIRST WITH YOUR GITHUB.IO LINK
+          SERVER_IP="dark-smp.github.io"
+          
+          RESPONSE=$(curl -s "https://mcsrvstat.us")
+          ONLINE=$(echo "$RESPONSE" | jq '.online')
+          
+          if [ "$ONLINE" = "true" ]; then
+            echo "STATUS=Online" >> $GITHUB_ENV
+            echo "PLAYERS=$(echo "$RESPONSE" | jq '.players.online')/$(echo "$RESPONSE" | jq '.players.max')" >> $GITHUB_ENV
+          else
+            echo "STATUS=Server Is Not Online" >> $GITHUB_ENV
+            echo "PLAYERS=0/0" >> $GITHUB_ENV
+          fi
+
+      - name: Update api.json data
+        run: |
+          echo '{
+            "endpoint": "dark-smp.github.io",
+            "server_status": "${{ env.STATUS }}",
+            "players_online": "${{ env.PLAYERS }}",
+            "last_checked": "$(date -u)"
+          }' > api.json
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+          git add api.json
+          git commit -m "Automated status update: ${{ env.STATUS }}" || exit 0
+          git push
