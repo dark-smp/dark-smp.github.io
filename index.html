@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dark SMP - Minecraft Server</title>
 
-    <!-- Ícone da aba (Bloco de Grama) -->
+    <!-- Tab Icon (Gras Block) -->
     <link rel="icon" type="image/x-icon" href="https://minecraftservices.com">
 
-    <!-- Evitar cache para atualizar rápido -->
+    <!-- Avoid caching to update instantly -->
     <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0" />
     <meta http-equiv="cache-control" content="max-age=0" />
     <meta http-equiv="expires" content="0" />
@@ -43,7 +43,6 @@
             padding: 20px;
         }
 
-        /* Container 400x350px original */
         .container {
             width: 400px;
             height: 350px;
@@ -62,7 +61,6 @@
                         0 0 50px rgba(255, 0, 50, 0.06);
         }
 
-        /* Título Principal */
         .main-title {
             color: #ffffff;
             font-size: 2.2rem; 
@@ -73,18 +71,15 @@
             text-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
         }
 
-        /* Painel de Informações */
         .info-box {
             display: flex;
             flex-direction: column;
             gap: 20px; 
-            
             opacity: 0;
             transform: translateY(10px);
             transition: opacity 1s ease, transform 1s ease;
         }
 
-        /* Revela as informações após os dados carregarem */
         .info-box.loaded {
             opacity: 1;
             transform: translateY(0);
@@ -116,7 +111,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* IP clicável */
         .ip-click {
             color: #00ffcc;
             cursor: pointer;
@@ -130,7 +124,6 @@
             text-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
         }
 
-        /* Indicador de Status */
         .status-wrapper {
             display: flex;
             align-items: center;
@@ -209,15 +202,18 @@
             const countText = document.getElementById("playerCount");
 
             try {
-                // Puxa as informações diretamente do arquivo api.json gerado pelo seu robô do GitHub
-                // O cache: 'no-store' garante que o navegador sempre pegue o status mais recente do servidor
-                const response = await fetch('./api.json', { cache: 'no-store' });
+                // Stable public API tracking your server directly in real-time
+                const response = await fetch(`https://mcsrvstat.us{ipVisual}`);
                 const data = await response.json();
 
                 if (dot && countText) {
-                    if (data && data.server_status === "Online") {
+                    if (data && data.online === true) {
                         dot.className = "status-dot status-online";
-                        countText.innerText = `${data.players_online} Players`;
+                        
+                        const onlinePlayers = data.players ? data.players.online : 0;
+                        const maxPlayers = data.players ? data.players.max : 0;
+
+                        countText.innerText = `${onlinePlayers} / ${maxPlayers} Players`;
                         countText.style.color = "#ffffff";
                     } else {
                         setOffline(dot, countText);
