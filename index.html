@@ -209,19 +209,15 @@
             const countText = document.getElementById("playerCount");
 
             try {
-                // Rota exata da sua API puxando as informações do servidor Java
-                const response = await fetch(`https://mc-api.io/server/JAVA/nicely-kaufman.tun.ply.gg`);
+                // Puxa as informações diretamente do arquivo api.json gerado pelo seu robô do GitHub
+                // O cache: 'no-store' garante que o navegador sempre pegue o status mais recente do servidor
+                const response = await fetch('./api.json', { cache: 'no-store' });
                 const data = await response.json();
 
                 if (dot && countText) {
-                    if (data && data.online === true) {
+                    if (data && data.server_status === "Online") {
                         dot.className = "status-dot status-online";
-                        
-                        // PUXANDO AS VARIÁVEIS EXATAS: onlinePlayers e maxPlayers
-                        const onlinePlayers = data.onlinePlayers ?? 0;
-                        const maxPlayers = data.maxPlayers ?? 0;
-
-                        countText.innerText = `${onlinePlayers} / ${maxPlayers} Players`;
+                        countText.innerText = `${data.players_online} Players`;
                         countText.style.color = "#ffffff";
                     } else {
                         setOffline(dot, countText);
