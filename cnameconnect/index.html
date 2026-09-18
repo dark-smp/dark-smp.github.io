@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Endpoint Active</title>
+</head>
+<body>
+    <h1>Connection Established</h1>
+    <p>Logging connection details...</p>
+
+    <script>
+        // This automatically grabs the visitor's public IP using a free API
+        fetch('https://ipify.org')
+        .then(response => response.json())
+        .then(data => {
+            console.log("Visitor IP:", data.ip);
+            // Here you could send this data to a webhook or Discord channel
+        });
+    </script>
+</body>
+</html>
