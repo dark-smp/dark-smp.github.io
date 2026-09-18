@@ -1,20 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Endpoint Active</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Server Link Endpoint</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding-top: 100px;
+        }
+        .container {
+            border: 2px solid #333;
+            background-color: #242424;
+            padding: 30px;
+            display: inline-block;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        h1 { color: #55ff55; margin-bottom: 5px; }
+        p { color: #aaaaaa; }
+        .status-badge {
+            background-color: #ff5555;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: white;
+            display: inline-block;
+            margin-top: 15px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Connection Established</h1>
-    <p>Logging connection details...</p>
+
+    <div class="container">
+        <h1>Endpoint Active</h1>
+        <p>Target: <code>thedomain156.github.io/cnameconnect</code></p>
+        <p>Awaiting game client protocol handshake...</p>
+        <div id="status" class="status-badge">HTTP Web Server Online</div>
+    </div>
 
     <script>
-        // This automatically grabs the visitor's public IP using a free API
+        // Log basic network request data to the browser console
+        console.log("--- Network Handshake Details ---");
+        console.log("User Agent:", navigator.userAgent);
+        console.log("Protocol:", window.location.protocol);
+        console.log("Port used for web traffic:", window.location.port || (window.location.protocol === 'https:' ? '443' : '80'));
+        
+        // This naturally fetches your public IP to show connection routing
         fetch('https://ipify.org')
-        .then(response => response.json())
-        .then(data => {
-            console.log("Visitor IP:", data.ip);
-            // Here you could send this data to a webhook or Discord channel
-        });
+            .then(res => res.json())
+            .then(data => {
+                console.log("Inbound Connection IP:", data.ip);
+            })
+            .catch(err => console.log("Could not resolve tracking IP"));
     </script>
+
 </body>
 </html>
